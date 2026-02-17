@@ -4,7 +4,7 @@ Basic Ralph is a simple, Python-based research-plan-implement loop for building 
 
 ## Overview
 
-Basic Ralph implements a three-phase workflow for AI-assisted software development:
+Basic Ralph implements a three-phase workflow for AI-assisted software development as part of "Frequent Intentional Context Compaction":
 
 1. **Research** - Analyze the task and document findings
 2. **Planning** - Create an implementation plan based on research
