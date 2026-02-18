@@ -10,6 +10,42 @@ Basic Ralph implements a three-phase workflow for AI-assisted software developme
 2. **Planning** - Create an implementation plan based on research
 3. **Implementation** - Execute the plan to complete the task
 
+## Workflow
+
+```mermaid
+flowchart TD
+    Start([Start]) --> CreateTicket[Create Ticket]
+    CreateTicket --> AutoClassify{Auto-Classify Task}
+    
+    AutoClassify -->|Simple| FastMode[Fast Mode]
+    AutoClassify -->|Medium/Complex| FullMode[Full Mode]
+    
+    FastMode --> ImplFast[Direct Implementation]
+    ImplFast --> CheckFast{Output contains<br/>COMPLETE?}
+    CheckFast -->|Yes| CloseTicketFast[Close Ticket]
+    CheckFast -->|No| ImplFast
+    CloseTicketFast --> GenerateSummaryFast[Generate Summary]
+    
+    FullMode --> Research[Research Phase]
+    Research --> SaveResearch[Save to<br/>.tickets/artifacts/<br/>TICKET/research.md]
+    SaveResearch --> CheckResearch{Output contains<br/>READY_FOR_NEXT_TASK?}
+    CheckResearch -->|No| Research
+    CheckResearch -->|Yes| Planning[Planning Phase]
+    
+    Planning --> SavePlan[Save to<br/>.tickets/artifacts/<br/>TICKET/plan.md]
+    SavePlan --> CheckPlan{Output contains<br/>READY_FOR_NEXT_TASK?}
+    CheckPlan -->|No| Planning
+    CheckPlan -->|Yes| Implementation[Implementation Phase]
+    
+    Implementation --> CheckImpl{Output contains<br/>COMPLETE?}
+    CheckImpl -->|No| Implementation
+    CheckImpl -->|Yes| CloseTicket[Close Ticket]
+    CloseTicket --> GenerateSummary[Generate Summary]
+    
+    GenerateSummaryFast --> End([End])
+    GenerateSummary --> End
+```
+
 ## Installation
 
 No installation required, uses only stdlib.
